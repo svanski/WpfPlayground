@@ -1,0 +1,65 @@
+﻿<Window x:Class="WpfTutorials.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vms="clr-namespace:WpfTutorials.UI.ViewModels"
+        xmlns:userControls="clr-namespace:WpfTutorials.UI.Views.UserControls"
+        Title="MainWindow" 
+        Height="350" 
+        Width="525">
+
+    <Window.DataContext>
+        <vms:NavigationWindowVIewModel/>
+    </Window.DataContext>
+    <Grid>
+        <TabControl>
+
+            <TabItem Header="Tab1">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Width="120" 
+                Height="30" 
+                Content="Click Me"
+                Command="{Binding RotateCommand}"/>
+
+                    <Grid Grid.Column="1" Background="IndianRed" RowSpan="2">
+                        <Grid.Resources>
+
+                            <!--Blue Data Tamplate Binding-->
+                            <DataTemplate DataType="{x:Type vms:BlueViewModel}">
+                                <userControls:BlueUserControlView/>
+                            </DataTemplate>
+
+                            <!--Red Data Tamplate Binding-->
+                            <DataTemplate DataType="{x:Type vms:RedViewModel}">
+                                <userControls:RedUserControlView/>
+                            </DataTemplate>
+
+                            <!--Green Data Tamplate Binding-->
+                            <DataTemplate DataType="{x:Type vms:GreenViewModel}">
+                                <userControls:GreenUserControlView/>
+                            </DataTemplate>
+
+                        </Grid.Resources>
+
+                        <ContentPresenter Content="{Binding ColorViewModel, UpdateSourceTrigger=PropertyChanged}"></ContentPresenter>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Tab 2"></TabItem>
+            
+        </TabControl>
+
+    </Grid>
+</Window>
